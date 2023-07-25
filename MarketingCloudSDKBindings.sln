@@ -5,6 +5,10 @@ VisualStudioVersion = 25.0.1706.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketingCloudSDKBindings.Android", "MarketingCloudSDKBindings.Android\MarketingCloudSDKBindings.Android.csproj", "{1FCA6A40-2BE1-4B01-BA00-A4344F062BCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketingCloudSDKBindings.iOS", "MarketingCloudSDKBindings.iOS\MarketingCloudSDKBindings.iOS.csproj", "{930CDF13-5184-48F7-BE85-9A5037707626}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFMCSDK.iOS", "SFMCSDK.iOS\SFMCSDK.iOS.csproj", "{A438D6C0-3E2F-4A50-A118-54601C60AAB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{1FCA6A40-2BE1-4B01-BA00-A4344F062BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FCA6A40-2BE1-4B01-BA00-A4344F062BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FCA6A40-2BE1-4B01-BA00-A4344F062BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{930CDF13-5184-48F7-BE85-9A5037707626}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{930CDF13-5184-48F7-BE85-9A5037707626}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{930CDF13-5184-48F7-BE85-9A5037707626}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{930CDF13-5184-48F7-BE85-9A5037707626}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A438D6C0-3E2F-4A50-A118-54601C60AAB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A438D6C0-3E2F-4A50-A118-54601C60AAB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A438D6C0-3E2F-4A50-A118-54601C60AAB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A438D6C0-3E2F-4A50-A118-54601C60AAB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
