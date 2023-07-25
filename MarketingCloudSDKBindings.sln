@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketingCloudSDKBindings.Android", "MarketingCloudSDKBindings.Android\MarketingCloudSDKBindings.Android.csproj", "{1FCA6A40-2BE1-4B01-BA00-A4344F062BCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FCA6A40-2BE1-4B01-BA00-A4344F062BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FCA6A40-2BE1-4B01-BA00-A4344F062BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FCA6A40-2BE1-4B01-BA00-A4344F062BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FCA6A40-2BE1-4B01-BA00-A4344F062BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2D1A42C-FE44-435F-97AB-C52D1E33B8FE}
+	EndGlobalSection
+EndGlobal
