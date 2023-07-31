@@ -49,8 +49,7 @@
 	<remove-node path="/api/package[@name='com.salesforce.marketingcloud.messages.proximity']/class[@name='ProximityMessageResponse']/method[@name='-deprecated_refreshCenter' and count(parameter)=0]" />
 	<remove-node path="/api/package[@name='com.salesforce.marketingcloud.messages.proximity']/class[@name='ProximityMessageResponse']/method[@name='-deprecated_refreshRadius' and count(parameter)=0]" />
 
-<!--	<attr path="/api/package[@name='com.salesforce.marketingcloud.messages.proximity']/class[@name='ProximityMessageResponse']/method[@name='refreshRadius' and count(parameter)=0]" name="managedName">refreshRadius</attr>
-	<attr path="/api/package[@name='com.salesforce.marketingcloud.messages.geofence']/class[@name='GeofenceMessageResponse']/method[@name='refreshRadius' and count(parameter)=0]" name="managedName">refreshRadius</attr>-->
+	<attr path="/api/package[@name='com.salesforce.marketingcloud']/class[@name='i']/method[@name='customPropertiesToJson' and count(parameter)=1 and parameter[1][@type='java.util.Map&lt;java.lang.String, ? extends java.lang.Object&gt;']]" name="managedName">customPropertiesToJsonLocal</attr>
 
 	<!-- Visibility -->
 	<!--

@@ -1,0 +1,16 @@
+﻿<metadata>
+  <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+
+  <attr path="/api/package[@name='com.salesforce.marketingcloud.sfmcsdk.components.http']/class[@name='Response.Creator']/method[@name='createFromParcel' and count(parameter)=1 and parameter[1][@type='android.os.Parcel']]" name="managedReturn">Java.Lang.Object</attr>
+
+  <attr path="/api/package[@name='com.salesforce.marketingcloud.sfmcsdk.components.http']/class[@name='Response.Creator']/method[@name='newArray' and count(parameter)=1 and parameter[1][@type='int']]" name="managedReturn">Java.Lang.Object[]</attr>
+
+  <!--<attr path="/api/package[@name='com.salesforce.marketingcloud.sfmcsdk']/class[@name='SFMCSdk']/method[@name='configure' and count(parameter)=3 and parameter[1][@type='android.content.Context'] and parameter[2][@type='com.salesforce.marketingcloud.sfmcsdk.SFMCSdkModuleConfig'] and parameter[3][@type='kotlin.jvm.functions.Function1<? super com.salesforce.marketingcloud.sfmcsdk.InitializationStatus, kotlin.Unit>']]/parameter[3]" name="managedType">Java.Lang.Object[]</attr>-->
+</metadata>
+
