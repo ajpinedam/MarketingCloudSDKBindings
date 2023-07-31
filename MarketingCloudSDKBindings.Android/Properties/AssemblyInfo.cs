@@ -7,13 +7,13 @@ using Android.App;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MarketingCloudSDKBindings.Android")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Xamarin Bindings for Android MarketingCloudSDK")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MarketingCloudSDKBindings.Android")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyCulture("en")]
 [assembly: ComVisible(false)]
 
 // Version information for an assembly consists of the following four values:
@@ -22,6 +22,6 @@ using Android.App;
 //      Minor Version 
 //      Build Number
 //      Revision
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.257.0")]
+[assembly: AssemblyFileVersion("1.0.257.0")]
 
