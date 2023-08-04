@@ -1,6 +1,9 @@
 ﻿using Android.Content;
-using Java.Lang;
+using Android.Runtime;
+using Java.Interop;
+using Kotlin;
 using Kotlin.Jvm.Functions;
+using System;
 
 namespace Com.Salesforce.Marketingcloud.Sfmcsdk
 {
@@ -12,11 +15,11 @@ namespace Com.Salesforce.Marketingcloud.Sfmcsdk
 		}
 	}
 
-    public class InitializationListener : Java.Lang.Object, IFunction1
+    public class InitializationListener : Java.Lang.Object, IFunction1, IFunction, IJavaObject, IJavaPeerable, IDisposable
     {
-        private readonly System.Action<InitializationStatus> OnInvoked;
+        private readonly System.Action<SFMCSdkInitializationStatus> OnInvoked;
 
-        public InitializationListener(System.Action<InitializationStatus> onInvoke)
+        public InitializationListener(System.Action<SFMCSdkInitializationStatus> onInvoke)
         {
             OnInvoked = onInvoke;
         }
@@ -25,10 +28,14 @@ namespace Com.Salesforce.Marketingcloud.Sfmcsdk
         {
             try
             {
-                InitializationStatus parameter = (InitializationStatus)objParameter;
+                SFMCSdkInitializationStatus parameter = (SFMCSdkInitializationStatus)objParameter;
                 OnInvoked?.Invoke(parameter);
             }
-            catch (Exception ex)
+            catch (Java.Lang.Exception ex)
+            {
+                // Exception handling, if needed
+            }
+            catch (System.Exception se)
             {
                 // Exception handling, if needed
             }
