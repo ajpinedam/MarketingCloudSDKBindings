@@ -1,97 +1,13 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using CoreLocation;
 using Foundation;
 using ObjCRuntime;
 using UIKit;
 using UserNotifications;
+using NativeHandle = System.IntPtr;
 
 namespace SFMCSDK
 {
-    // @interface SFMCEncryptionKey : NSObject <NSCoding, NSCopying>
-    [BaseType(typeof(NSObject))]
-    interface SFMCEncryptionKey : INSCoding, INSCopying
-    {
-        // -(id _Nonnull)initWithData:(NSData * _Nonnull)keyData initializationVector:(NSData * _Nullable)iv;
-        [Export("initWithData:initializationVector:")]
-        IntPtr Constructor(NSData keyData, [NullAllowed] NSData iv);
-
-        // +(SFMCEncryptionKey * _Nonnull)createKey;
-        [Static]
-        [Export("createKey")]
-        // [Verify(MethodToProperty)]
-        SFMCEncryptionKey CreateKey { get; }
-
-        // -(NSData * _Nullable)encryptData:(NSData * _Nonnull)dataToEncrypt;
-        [Export("encryptData:")]
-        [return: NullAllowed]
-        NSData EncryptData(NSData dataToEncrypt);
-
-        // -(NSData * _Nullable)decryptData:(NSData * _Nonnull)dataToDecrypt;
-        [Export("decryptData:")]
-        [return: NullAllowed]
-        NSData DecryptData(NSData dataToDecrypt);
-
-        // @property (copy, nonatomic) NSData * _Nullable key;
-        [NullAllowed, Export("key", ArgumentSemantic.Copy)]
-        NSData Key { get; set; }
-
-        // @property (copy, nonatomic) NSData * _Nonnull initializationVector;
-        [Export("initializationVector", ArgumentSemantic.Copy)]
-        NSData InitializationVector { get; set; }
-
-        // @property (readonly, nonatomic) NSString * _Nullable keyAsString;
-        [NullAllowed, Export("keyAsString")]
-        string KeyAsString { get; }
-
-        // @property (readonly, nonatomic) NSString * _Nullable initializationVectorAsString;
-        [NullAllowed, Export("initializationVectorAsString")]
-        string InitializationVectorAsString { get; }
-    }
-
-    // @interface SFMCKeyStoreManager : NSObject
-    [BaseType(typeof(NSObject))]
-    interface SFMCKeyStoreManager
-    {
-        // +(instancetype _Nonnull)sharedInstance;
-        [Static]
-        [Export("sharedInstance")]
-        SFMCKeyStoreManager SharedInstance();
-
-        // -(SFMCEncryptionKey * _Nonnull)retrieveKeyWithLabel:(NSString * _Nonnull)keyLabel autoCreate:(BOOL)create;
-        [Export("retrieveKeyWithLabel:autoCreate:")]
-        SFMCEncryptionKey RetrieveKeyWithLabel(string keyLabel, bool create);
-
-        // -(void)storeKey:(SFMCEncryptionKey * _Nonnull)key withLabel:(NSString * _Nonnull)keyLabel;
-        [Export("storeKey:withLabel:")]
-        void StoreKey(SFMCEncryptionKey key, string keyLabel);
-
-        // -(void)removeKeyWithLabel:(NSString * _Nonnull)keyLabel;
-        [Export("removeKeyWithLabel:")]
-        void RemoveKeyWithLabel(string keyLabel);
-
-        // -(BOOL)keyWithLabelExists:(NSString * _Nonnull)keyLabel;
-        [Export("keyWithLabelExists:")]
-        bool KeyWithLabelExists(string keyLabel);
-
-        // -(BOOL)keyExists:(NSString * _Nonnull)keyLabel keychain:(NSString * _Nonnull)keychain;
-        [Export("keyExists:keychain:")]
-        bool KeyExists(string keyLabel, string keychain);
-
-        // -(OSStatus)storeData:(NSData * _Nonnull)data forKey:(NSString * _Nonnull)key keychainID:(NSString * _Nonnull)keychain;
-        [Export("storeData:forKey:keychainID:")]
-        int StoreData(NSData data, string key, string keychain);
-
-        // -(NSData * _Nullable)dataForKey:(NSString * _Nonnull)key keychainID:(NSString * _Nonnull)keychain;
-        [Export("dataForKey:keychainID:")]
-        [return: NullAllowed]
-        NSData DataForKey(string key, string keychain);
-
-        // -(BOOL)removeKeyChainWithID:(NSString * _Nonnull)keychain;
-        [Export("removeKeyChainWithID:")]
-        bool RemoveKeyChainWithID(string keychain);
-    }
-
     [Static]
     // [Verify(ConstantsInterfaceAssociation)]
     partial interface Constants
@@ -107,67 +23,10 @@ namespace SFMCSDK
         NSString kSFKeychainItemExceptionErrorCodeKey { get; }
     }
 
-    // @interface SFMCKeychainItemWrapper : NSObject
-    [BaseType(typeof(NSObject))]
-    interface SFMCKeychainItemWrapper
-    {
-        // @property (readonly, nonatomic) CFTypeRef _Nullable accessibleAttribute;
-        //[NullAllowed, Export("accessibleAttribute")]
-        //unsafe void* AccessibleAttribute { get; }
-
-        // +(CFTypeRef _Nullable)accessibleAttribute;
-        // +(void)setAccessibleAttribute:(CFTypeRef _Nullable)accessibleAttribute;
-        [Static]
-        [Export("accessibleAttribute")]
-        // [Verify(MethodToProperty)]
-        unsafe void* AccessibleAttribute { get; set; }
-
-        // +(BOOL)keychainAccessErrorsAreFatal;
-        // +(void)setKeychainAccessErrorsAreFatal:(BOOL)errorsAreFatal;
-        [Static]
-        [Export("keychainAccessErrorsAreFatal")]
-        // [Verify(MethodToProperty)]
-        bool KeychainAccessErrorsAreFatal { get; set; }
-
-        // +(SFMCKeychainItemWrapper * _Nullable)itemWithIdentifier:(NSString * _Nullable)identifier account:(NSString * _Nullable)account;
-        [Static]
-        [Export("itemWithIdentifier:account:")]
-        [return: NullAllowed]
-        SFMCKeychainItemWrapper ItemWithIdentifier([NullAllowed] string identifier, [NullAllowed] string account);
-
-        // -(BOOL)resetKeychainItem;
-        [Export("resetKeychainItem")]
-        bool ResetKeychainItem();
-
-        // -(OSStatus)setValueData:(NSData * _Nullable)data;
-        [Export("setValueData:")]
-        int SetValueData([NullAllowed] NSData data);
-
-        // -(NSString * _Nullable)valueString;
-        [Export("valueString")]
-        [return: NullAllowed]
-        string ValueString();
-
-        // -(OSStatus)setValueString:(NSString * _Nullable)string;
-        [Export("setValueString:")]
-        int SetValueString([NullAllowed] string @string);
-
-        // -(NSData * _Nullable)valueData;
-        [Export("valueData")]
-        [return: NullAllowed]
-        NSData ValueData();
-
-        // +(NSString * _Nullable)keychainErrorCodeString:(OSStatus)errorCode;
-        [Static]
-        [Export("keychainErrorCodeString:")]
-        [return: NullAllowed]
-        string KeychainErrorCodeString(int errorCode);
-    }
-
     // @interface  (UIViewController)
     [Category]
     [BaseType(typeof(UIViewController))]
-    interface UIViewController_
+    public interface UIViewController_
     {
         // +(void)swizzleViewDidAppearForScreenTracking;
         [Static]
@@ -175,9 +34,8 @@ namespace SFMCSDK
         void SwizzleViewDidAppearForScreenTracking();
     }
 
-    //[Static]
     // [Verify(ConstantsInterfaceAssociation)]
-    partial interface Constants
+    public partial interface Constants
     {
         // extern double SFMCSdkVersionNumber;
         [Field("SFMCSdkVersionNumber", "__Internal")]
@@ -199,7 +57,7 @@ namespace SFMCSDK
       be used.
     */
     [Protocol]
-    interface SFMCSdkEvent
+    public interface SFMCSdkEvent
     {
         // @required @property (readonly, copy, nonatomic) NSString * _Nonnull id;
         [Abstract]
@@ -225,7 +83,7 @@ namespace SFMCSDK
     // @interface SFMCSdkEngagementEvent : NSObject <SFMCSdkEvent>
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkEngagementEvent : SFMCSdkEvent
+    public interface SFMCSdkEngagementEvent : SFMCSdkEvent
     {
         // @property (readonly, copy, nonatomic) NSString * _Nonnull id;
         [Export("id")]
@@ -246,7 +104,7 @@ namespace SFMCSDK
 
     // @interface SFMCSdkCartEvent : SFMCSdkEngagementEvent
     [BaseType(typeof(SFMCSdkEngagementEvent))]
-    interface SFMCSdkCartEvent
+    public interface SFMCSdkCartEvent
     {
         // @property (readonly, copy, nonatomic) NSArray<SFMCSdkLineItem *> * _Nonnull lineItems;
         [Export("lineItems", ArgumentSemantic.Copy)]
@@ -255,43 +113,43 @@ namespace SFMCSDK
 
     // @interface SFMCSdkAddToCartEvent : SFMCSdkCartEvent
     [BaseType(typeof(SFMCSdkCartEvent))]
-    interface SFMCSdkAddToCartEvent
+    public interface SFMCSdkAddToCartEvent
     {
         // -(instancetype _Nonnull)initWithLineItem:(SFMCSdkLineItem * _Nonnull)lineItem __attribute__((objc_designated_initializer));
         [Export("initWithLineItem:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkLineItem lineItem);
+        NativeHandle Constructor(SFMCSdkLineItem lineItem);
     }
 
     // @interface SFMCSdkBehavior : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkBehavior
+    public interface SFMCSdkBehavior
     {
     }
 
     // @interface SFMCSdkAppBackgrounded : SFMCSdkBehavior
     [BaseType(typeof(SFMCSdkBehavior))]
-    interface SFMCSdkAppBackgrounded
+    public interface SFMCSdkAppBackgrounded
     {
     }
 
     // @interface SFMCSdkAppForegrounded : SFMCSdkBehavior
     [BaseType(typeof(SFMCSdkBehavior))]
-    interface SFMCSdkAppForegrounded
+    public interface SFMCSdkAppForegrounded
     {
     }
 
     // @interface SFMCSdkAppVersionChanged : SFMCSdkBehavior
     [BaseType(typeof(SFMCSdkBehavior))]
-    interface SFMCSdkAppVersionChanged
+    public interface SFMCSdkAppVersionChanged
     {
     }
 
     // @interface SFMCSdkAuthHeader : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkAuthHeader
+    public interface SFMCSdkAuthHeader
     {
         // @property (readonly, copy, nonatomic) NSString * _Nonnull key;
         [Export("key")]
@@ -304,7 +162,7 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithKey:(NSString * _Nonnull)key value:(NSString * _Nonnull)value __attribute__((objc_designated_initializer));
         [Export("initWithKey:value:")]
         [DesignatedInitializer]
-        IntPtr Constructor(string key, string value);
+        NativeHandle Constructor(string key, string value);
     }
 
     // @protocol SFMCSdkAuthenticator
@@ -318,7 +176,7 @@ namespace SFMCSDK
       be used.
     */
     [Protocol]
-    interface SFMCSdkAuthenticator
+    public interface SFMCSdkAuthenticator
     {
         // @required @property (readonly, nonatomic, strong) NSLock * _Nonnull lock;
         [Abstract]
@@ -346,7 +204,7 @@ namespace SFMCSDK
     // @interface SFMCSdkBehaviorManager : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkBehaviorManager
+    public interface SFMCSdkBehaviorManager
     {
     }
 
@@ -361,7 +219,7 @@ namespace SFMCSDK
       be used.
     */
     [Protocol]
-    interface SFMCSdkBehaviorObserver
+    public interface SFMCSdkBehaviorObserver
     {
         // @required @property (readonly, copy, nonatomic) NSSet<NSNumber *> * _Nonnull behaviorTypesToObserve;
         [Abstract]
@@ -385,7 +243,7 @@ namespace SFMCSDK
       be used.
     */
     [Protocol(Name = "_TtP7SFMCSDK12CdpInterface_")]
-    interface CdpInterface
+    public interface CdpInterface
     {
         // @required -(enum SFMCSdkConsent)getConsent __attribute__((warn_unused_result("")));
         [Abstract]
@@ -413,7 +271,7 @@ namespace SFMCSDK
     // @interface SFMCSdkCDP : NSObject <CdpInterface>
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkCDP : CdpInterface
+    public interface SFMCSdkCDP : CdpInterface
     {
         // -(enum SFMCSdkModuleStatus)getStatus __attribute__((warn_unused_result("")));
         [Export("getStatus")]
@@ -441,7 +299,7 @@ namespace SFMCSDK
 
     // @interface SFMCSdkOrderEvent : SFMCSdkEngagementEvent
     [BaseType(typeof(SFMCSdkEngagementEvent))]
-    interface SFMCSdkOrderEvent
+    public interface SFMCSdkOrderEvent
     {
         // @property (readonly, nonatomic, strong) SFMCSdkOrder * _Nonnull order;
         [Export("order", ArgumentSemantic.Strong)]
@@ -450,18 +308,18 @@ namespace SFMCSDK
 
     // @interface SFMCSdkCancelOrderEvent : SFMCSdkOrderEvent
     [BaseType(typeof(SFMCSdkOrderEvent))]
-    interface SFMCSdkCancelOrderEvent
+    public interface SFMCSdkCancelOrderEvent
     {
         // -(instancetype _Nonnull)initWithOrder:(SFMCSdkOrder * _Nonnull)order __attribute__((objc_designated_initializer));
         [Export("initWithOrder:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkOrder order);
+        NativeHandle Constructor(SFMCSdkOrder order);
     }
 
     // @interface SFMCSdkCatalogObject : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkCatalogObject
+    public interface SFMCSdkCatalogObject
     {
         // @property (readonly, copy, nonatomic) NSString * _Nonnull type;
         [Export("type")]
@@ -482,12 +340,12 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithType:(NSString * _Nonnull)type id:(NSString * _Nonnull)id attributes:(NSDictionary<NSString *,id> * _Nonnull)attributes relatedCatalogObjects:(NSDictionary<NSString *,NSArray<NSString *> *> * _Nonnull)relatedCatalogObjects __attribute__((objc_designated_initializer));
         [Export("initWithType:id:attributes:relatedCatalogObjects:")]
         [DesignatedInitializer]
-        IntPtr Constructor(string type, string id, NSDictionary<NSString, NSObject> attributes, NSDictionary<NSString, NSArray<NSString>> relatedCatalogObjects);
+        NativeHandle Constructor(string type, string id, NSDictionary<NSString, NSObject> attributes, NSDictionary<NSString, NSArray<NSString>> relatedCatalogObjects);
     }
 
     // @interface SFMCSdkCatalogObjectEvent : SFMCSdkEngagementEvent
     [BaseType(typeof(SFMCSdkEngagementEvent))]
-    interface SFMCSdkCatalogObjectEvent
+    public interface SFMCSdkCatalogObjectEvent
     {
         // @property (readonly, nonatomic, strong) SFMCSdkCatalogObject * _Nonnull catalogObject;
         [Export("catalogObject", ArgumentSemantic.Strong)]
@@ -496,25 +354,25 @@ namespace SFMCSDK
 
     // @interface SFMCSdkCommentCatalogObjectEvent : SFMCSdkCatalogObjectEvent
     [BaseType(typeof(SFMCSdkCatalogObjectEvent))]
-    interface SFMCSdkCommentCatalogObjectEvent
+    public interface SFMCSdkCommentCatalogObjectEvent
     {
         // -(instancetype _Nonnull)initWithCatalogObject:(SFMCSdkCatalogObject * _Nonnull)catalogObject __attribute__((objc_designated_initializer));
         [Export("initWithCatalogObject:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkCatalogObject catalogObject);
+        NativeHandle Constructor(SFMCSdkCatalogObject catalogObject);
     }
 
     // @interface SFMCSdkCompatibility : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkCompatibility
+    public interface SFMCSdkCompatibility
     {
     }
 
     // @interface SFMCSdkCompletedCall : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkCompletedCall
+    public interface SFMCSdkCompletedCall
     {
         // @property (readonly, nonatomic, strong) SFMCSdkWrappedRequest * _Nonnull wrappedRequest;
         [Export("wrappedRequest", ArgumentSemantic.Strong)]
@@ -527,19 +385,19 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)init:(SFMCSdkWrappedRequest * _Nonnull)wrappedRequest :(SFMCSdkWrappedResponse * _Nonnull)wrappedResponse __attribute__((objc_designated_initializer));
         [Export("init::")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkWrappedRequest wrappedRequest, SFMCSdkWrappedResponse wrappedResponse);
+        NativeHandle Constructor(SFMCSdkWrappedRequest wrappedRequest, SFMCSdkWrappedResponse wrappedResponse);
     }
 
     // @interface SFMCSdkConfig : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkConfig
+    public interface SFMCSdkConfig
     {
     }
 
     // @interface SFMCSdkConfigBuilder : NSObject
     [BaseType(typeof(NSObject))]
-    interface SFMCSdkConfigBuilder
+    public interface SFMCSdkConfigBuilder
     {
         // -(SFMCSdkConfigBuilder * _Nonnull)setCdpWithConfig:(id<SFMCSdkModuleConfig> _Nonnull)config onCompletion:(void (^ _Nullable)(enum SFMCSdkOperationResult))onCompletion __attribute__((warn_unused_result("")));
         [Export("setCdpWithConfig:onCompletion:")]
@@ -566,7 +424,7 @@ namespace SFMCSDK
       be used.
     */
     [Protocol]
-    interface SFMCSdkCoordinates
+    public interface SFMCSdkCoordinates
     {
         // @required @property (readonly, nonatomic) double latitude;
         [Abstract]
@@ -603,23 +461,23 @@ namespace SFMCSDK
         // -(instancetype _Nullable)initWithName:(NSString * _Nonnull)name attributes:(NSDictionary<NSString *,id> * _Nullable)attributes __attribute__((objc_designated_initializer));
         [Export("initWithName:attributes:")]
         [DesignatedInitializer]
-        IntPtr Constructor(string name, [NullAllowed] NSDictionary<NSString, NSObject> attributes);
+        NativeHandle Constructor(string name, [NullAllowed] NSDictionary<NSString, NSObject> attributes);
     }
 
     // @interface SFMCSdkDeliverOrderEvent : SFMCSdkOrderEvent
     [BaseType(typeof(SFMCSdkOrderEvent))]
-    interface SFMCSdkDeliverOrderEvent
+    public interface SFMCSdkDeliverOrderEvent
     {
         // -(instancetype _Nonnull)initWithOrder:(SFMCSdkOrder * _Nonnull)order __attribute__((objc_designated_initializer));
         [Export("initWithOrder:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkOrder order);
+        NativeHandle Constructor(SFMCSdkOrder order);
     }
 
     // @interface SFMCSdkEncryptionManager : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkEncryptionManager
+    public interface SFMCSdkEncryptionManager
     {
         // -(NSData * _Nullable)encryptWithString:(NSString * _Nonnull)string __attribute__((warn_unused_result("")));
         [Export("encryptWithString:")]
@@ -635,7 +493,7 @@ namespace SFMCSDK
     // @interface SFMCSdkEventBus : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkEventBus
+    public interface SFMCSdkEventBus
     {
         // +(void)publishWithProducer:(enum SFMCSdkMessageProducer)producer event:(id<SFMCSdkEvent> _Nonnull)event;
         [Static]
@@ -660,18 +518,18 @@ namespace SFMCSDK
 
     // @interface SFMCSdkExchangeOrderEvent : SFMCSdkOrderEvent
     [BaseType(typeof(SFMCSdkOrderEvent))]
-    interface SFMCSdkExchangeOrderEvent
+    public interface SFMCSdkExchangeOrderEvent
     {
         // -(instancetype _Nonnull)initWithOrder:(SFMCSdkOrder * _Nonnull)order __attribute__((objc_designated_initializer));
         [Export("initWithOrder:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkOrder order);
+        NativeHandle Constructor(SFMCSdkOrder order);
     }
 
     // @interface SFMCSdkFakeEvent : NSObject <SFMCSdkEvent>
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkFakeEvent : SFMCSdkEvent
+    public interface SFMCSdkFakeEvent : SFMCSdkEvent
     {
         // @property (readonly, copy, nonatomic) NSString * _Nonnull id;
         [Export("id")]
@@ -692,23 +550,23 @@ namespace SFMCSDK
         // -(instancetype _Nullable)initWithName:(NSString * _Nonnull)name __attribute__((objc_designated_initializer));
         [Export("initWithName:")]
         [DesignatedInitializer]
-        IntPtr Constructor(string name);
+        NativeHandle Constructor(string name);
     }
 
     // @interface SFMCSdkFavoriteCatalogObjectEvent : SFMCSdkCatalogObjectEvent
     [BaseType(typeof(SFMCSdkCatalogObjectEvent))]
-    interface SFMCSdkFavoriteCatalogObjectEvent
+    public interface SFMCSdkFavoriteCatalogObjectEvent
     {
         // -(instancetype _Nonnull)initWithCatalogObject:(SFMCSdkCatalogObject * _Nonnull)catalogObject __attribute__((objc_designated_initializer));
         [Export("initWithCatalogObject:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkCatalogObject catalogObject);
+        NativeHandle Constructor(SFMCSdkCatalogObject catalogObject);
     }
 
     // @interface SFMCSdkIDENTITY : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkIDENTITY
+    public interface SFMCSdkIDENTITY
     {
         // -(NSString * _Nonnull)toJson __attribute__((warn_unused_result("")));
         [Export("toJson")]
@@ -759,7 +617,7 @@ namespace SFMCSDK
       be used.
     */
     [Protocol]
-    interface SFMCSdkIdentityEventProtocol : SFMCSdkEvent
+    public interface SFMCSdkIdentityEventProtocol : SFMCSdkEvent
     {
         // @required @property (readonly, copy, nonatomic) NSString * _Nullable profileId;
         [Abstract]
@@ -780,7 +638,7 @@ namespace SFMCSDK
     // @interface SFMCSdkIdentityEvent : NSObject <SFMCSdkIdentityEventProtocol>
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkIdentityEvent : SFMCSdkIdentityEventProtocol
+    public interface SFMCSdkIdentityEvent : SFMCSdkIdentityEventProtocol
     {
         // @property (readonly, copy, nonatomic) NSString * _Nonnull id;
         [Export("id")]
@@ -809,22 +667,22 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithProfileId:(NSString * _Nonnull)profileId __attribute__((objc_designated_initializer));
         [Export("initWithProfileId:")]
         [DesignatedInitializer]
-        IntPtr Constructor(string profileId);
+        NativeHandle Constructor(string profileId);
 
         // -(instancetype _Nonnull)initWithProfileAttributes:(NSDictionary<NSString *,NSString *> * _Nonnull)profileAttributes __attribute__((objc_designated_initializer));
         [Export("initWithProfileAttributes:")]
         [DesignatedInitializer]
-        IntPtr Constructor(NSDictionary<NSString, NSString> profileAttributes);
+        NativeHandle Constructor(NSDictionary<NSString, NSString> profileAttributes);
 
         // -(instancetype _Nonnull)initWithAttributes:(NSDictionary<NSString *,id> * _Nonnull)attributes __attribute__((objc_designated_initializer));
         [Export("initWithAttributes:")]
         [DesignatedInitializer]
-        IntPtr Constructor(NSDictionary<NSString, NSObject> attributes);
+        NativeHandle Constructor(NSDictionary<NSString, NSObject> attributes);
     }
 
     // @protocol SFMCSdkInAppMessageEventDelegate
-    [Protocol, Model(AutoGeneratedName = false)]
-    interface SFMCSdkInAppMessageEventDelegate
+    [Protocol, Model(AutoGeneratedName = true)]
+    public interface SFMCSdkInAppMessageEventDelegate
     {
         // @optional -(BOOL)sfmc_shouldShowInAppMessage:(NSDictionary * _Nonnull)message __attribute__((warn_unused_result("")));
         [Export("sfmc_shouldShowInAppMessage:")]
@@ -840,21 +698,21 @@ namespace SFMCSDK
     }
 
     // @protocol SFMCSdkInboxMessagesDataSource <UITableViewDataSource>
-    [Protocol, Model(AutoGeneratedName = false)]
-    interface SFMCSdkInboxMessagesDataSource : IUITableViewDataSource
+    [Protocol, Model(AutoGeneratedName = true)]
+    public interface SFMCSdkInboxMessagesDataSource : IUITableViewDataSource
     {
     }
 
     // @protocol SFMCSdkInboxMessagesDelegate <UITableViewDelegate>
-    [Protocol, Model(AutoGeneratedName = false)]
-    interface SFMCSdkInboxMessagesDelegate : IUITableViewDelegate
+    [Protocol, Model(AutoGeneratedName = true)]
+    public interface SFMCSdkInboxMessagesDelegate : IUITableViewDelegate
     {
     }
 
     // @interface SFMCSdkLineItem : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkLineItem
+    public interface SFMCSdkLineItem
     {
         // @property (readonly, copy, nonatomic) NSString * _Nonnull catalogObjectType;
         [Export("catalogObjectType")]
@@ -883,12 +741,12 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithCatalogObjectType:(NSString * _Nonnull)catalogObjectType catalogObjectId:(NSString * _Nonnull)catalogObjectId quantity:(NSInteger)quantity price:(NSDecimalNumber * _Nullable)price currency:(NSString * _Nullable)currency attributes:(NSDictionary<NSString *,id> * _Nonnull)attributes __attribute__((objc_designated_initializer));
         [Export("initWithCatalogObjectType:catalogObjectId:quantity:price:currency:attributes:")]
         [DesignatedInitializer]
-        IntPtr Constructor(string catalogObjectType, string catalogObjectId, nint quantity, [NullAllowed] NSDecimalNumber price, [NullAllowed] string currency, NSDictionary<NSString, NSObject> attributes);
+        NativeHandle Constructor(string catalogObjectType, string catalogObjectId, nint quantity, [NullAllowed] NSDecimalNumber price, [NullAllowed] string currency, NSDictionary<NSString, NSObject> attributes);
     }
 
     // @protocol SFMCSdkLocationDelegate
-    [Protocol, Model(AutoGeneratedName = false)]
-    interface SFMCSdkLocationDelegate
+    [Protocol, Model(AutoGeneratedName = true)]
+    public interface SFMCSdkLocationDelegate
     {
         // @required -(BOOL)sfmc_shouldShowLocationMessage:(NSDictionary * _Nonnull)message forRegion:(NSDictionary * _Nonnull)region __attribute__((warn_unused_result("")));
         [Abstract]
@@ -898,7 +756,7 @@ namespace SFMCSDK
 
     // @interface SFMCSdkLogOutputter : NSObject
     [BaseType(typeof(NSObject))]
-    interface SFMCSdkLogOutputter
+    public interface SFMCSdkLogOutputter
     {
         // -(void)outWithLevel:(enum SFMCSdkLogLevel)level subsystem:(NSString * _Nonnull)subsystem category:(enum SFMCSdkLoggerCategory)category message:(NSString * _Nonnull)message;
         [Export("outWithLevel:subsystem:category:message:")]
@@ -916,7 +774,7 @@ namespace SFMCSDK
       be used.
     */
     [Protocol(Name = "_TtP7SFMCSDK6Logger_")]
-    interface Logger
+    public interface Logger
     {
         // @required @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull redactedValues;
         [Abstract]
@@ -927,7 +785,7 @@ namespace SFMCSDK
     // @interface SFMCSdkMessage : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkMessage
+    public interface SFMCSdkMessage
     {
     }
 
@@ -942,7 +800,7 @@ namespace SFMCSDK
       be used.
     */
     [Protocol]
-    interface SFMCSdkModuleConfig
+    public interface SFMCSdkModuleConfig
     {
         // @required @property (readonly, nonatomic) enum SFMCSdkModuleName name;
         [Abstract]
@@ -971,7 +829,7 @@ namespace SFMCSDK
       be used.
     */
     [Protocol]
-    interface SFMCSdkModuleIdentity
+    public interface SFMCSdkModuleIdentity
     {
         // @required @property (readonly, copy, nonatomic) NSString * _Nonnull applicationId;
         [Abstract]
@@ -1003,7 +861,7 @@ namespace SFMCSDK
     // @interface SFMCSdkModuleLogger : NSObject <Logger>
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkModuleLogger : Logger
+    public interface SFMCSdkModuleLogger : Logger
     {
         // @property (copy, nonatomic) NSArray<NSString *> * _Nonnull redactedValues;
         [Export("redactedValues", ArgumentSemantic.Copy)]
@@ -1012,7 +870,7 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithModule:(enum SFMCSdkModuleName)module_ redactedValues:(NSArray<NSString *> * _Nonnull)redactedValues __attribute__((objc_designated_initializer));
         [Export("initWithModule:redactedValues:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkModuleName module_, string[] redactedValues);
+        NativeHandle Constructor(SFMCSdkModuleName module_, string[] redactedValues);
 
         // -(void)setWithRedactedValues:(NSArray<NSString *> * _Nonnull)redactedValues;
         [Export("setWithRedactedValues:")]
@@ -1038,12 +896,12 @@ namespace SFMCSDK
     // @interface SFMCSdkNetworkManager : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkNetworkManager
+    public interface SFMCSdkNetworkManager
     {
         // -(instancetype _Nonnull)initWithNetworkPreferences:(SFMCSdkSecurePrefs * _Nonnull)networkPreferences authenticator:(id<SFMCSdkAuthenticator> _Nullable)authenticator __attribute__((objc_designated_initializer));
         [Export("initWithNetworkPreferences:authenticator:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkSecurePrefs networkPreferences, [NullAllowed] SFMCSdkAuthenticator authenticator);
+        NativeHandle Constructor(SFMCSdkSecurePrefs networkPreferences, [NullAllowed] SFMCSdkAuthenticator authenticator);
 
         // -(SFMCSdkCompletedCall * _Nonnull)executeSync:(SFMCSdkWrappedRequest * _Nonnull)wrappedRequest __attribute__((warn_unused_result("")));
         [Export("executeSync:")]
@@ -1061,7 +919,7 @@ namespace SFMCSDK
     // @interface SFMCSdkOrder : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkOrder
+    public interface SFMCSdkOrder
     {
         // @property (readonly, copy, nonatomic) NSString * _Nonnull id;
         [Export("id")]
@@ -1086,7 +944,7 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id lineItems:(NSArray<SFMCSdkLineItem *> * _Nonnull)lineItems totalValue:(NSDecimalNumber * _Nullable)totalValue currency:(NSString * _Nullable)currency attributes:(NSDictionary<NSString *,id> * _Nonnull)attributes __attribute__((objc_designated_initializer));
         [Export("initWithId:lineItems:totalValue:currency:attributes:")]
         [DesignatedInitializer]
-        IntPtr Constructor(string id, SFMCSdkLineItem[] lineItems, [NullAllowed] NSDecimalNumber totalValue, [NullAllowed] string currency, NSDictionary<NSString, NSObject> attributes);
+        NativeHandle Constructor(string id, SFMCSdkLineItem[] lineItems, [NullAllowed] NSDecimalNumber totalValue, [NullAllowed] string currency, NSDictionary<NSString, NSObject> attributes);
     }
 
     // @protocol PushInterface
@@ -1100,7 +958,7 @@ namespace SFMCSDK
       be used.
     */
     [Protocol(Name = "_TtP7SFMCSDK13PushInterface_")]
-    interface PushInterface
+    public interface PushInterface
     {
         // @required -(id<SFMCSdkModuleIdentity> _Nullable)getIdentity __attribute__((warn_unused_result("")));
         [Abstract]
@@ -1446,7 +1304,7 @@ namespace SFMCSDK
     // @interface SFMCSdkPUSH : NSObject <PushInterface>
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkPUSH : PushInterface
+    public interface SFMCSdkPUSH : PushInterface
     {
         // -(enum SFMCSdkModuleStatus)getStatus __attribute__((warn_unused_result("")));
         [Export("getStatus")]
@@ -1741,7 +1599,7 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithOrder:(SFMCSdkOrder * _Nonnull)order __attribute__((objc_designated_initializer));
         [Export("initWithOrder:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkOrder order);
+        NativeHandle Constructor(SFMCSdkOrder order);
     }
 
     // @interface SFMCSdkPurchaseOrderEvent : SFMCSdkOrderEvent
@@ -1751,7 +1609,7 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithOrder:(SFMCSdkOrder * _Nonnull)order __attribute__((objc_designated_initializer));
         [Export("initWithOrder:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkOrder order);
+        NativeHandle Constructor(SFMCSdkOrder order);
     }
 
     // @interface SFMCSdkQuickViewCatalogObjectEvent : SFMCSdkCatalogObjectEvent
@@ -1761,7 +1619,7 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithCatalogObject:(SFMCSdkCatalogObject * _Nonnull)catalogObject __attribute__((objc_designated_initializer));
         [Export("initWithCatalogObject:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkCatalogObject catalogObject);
+        NativeHandle Constructor(SFMCSdkCatalogObject catalogObject);
     }
 
     // @interface SFMCSdkRemoveFromCartEvent : SFMCSdkCartEvent
@@ -1771,7 +1629,7 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithLineItem:(SFMCSdkLineItem * _Nonnull)lineItem __attribute__((objc_designated_initializer));
         [Export("initWithLineItem:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkLineItem lineItem);
+        NativeHandle Constructor(SFMCSdkLineItem lineItem);
     }
 
     // @interface SFMCSdkReplaceCartEvent : SFMCSdkCartEvent
@@ -1781,7 +1639,7 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithLineItems:(NSArray<SFMCSdkLineItem *> * _Nonnull)lineItems __attribute__((objc_designated_initializer));
         [Export("initWithLineItems:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkLineItem[] lineItems);
+        NativeHandle Constructor(SFMCSdkLineItem[] lineItems);
     }
 
     // @interface SFMCSdkReturnOrderEvent : SFMCSdkOrderEvent
@@ -1791,7 +1649,7 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithOrder:(SFMCSdkOrder * _Nonnull)order __attribute__((objc_designated_initializer));
         [Export("initWithOrder:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkOrder order);
+        NativeHandle Constructor(SFMCSdkOrder order);
     }
 
     // @interface SFMCSdkReviewCatalogObjectEvent : SFMCSdkCatalogObjectEvent
@@ -1801,7 +1659,7 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithCatalogObject:(SFMCSdkCatalogObject * _Nonnull)catalogObject __attribute__((objc_designated_initializer));
         [Export("initWithCatalogObject:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkCatalogObject catalogObject);
+        NativeHandle Constructor(SFMCSdkCatalogObject catalogObject);
     }
 
     // @protocol SFMCModule
@@ -1815,7 +1673,7 @@ namespace SFMCSDK
       be used.
     */
     [Protocol(Name = "_TtP7SFMCSDK10SFMCModule_")]
-    interface SFMCModule
+    public interface SFMCModule
     {
         // @required @property (readonly, nonatomic) enum SFMCSdkModuleName name;
         [Abstract]
@@ -1842,7 +1700,7 @@ namespace SFMCSDK
     // @interface SFMCSdk : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdk
+    public interface SFMCSdk
     {
         // @property (nonatomic, strong, class) SFMCSdkCDP * _Nonnull cdp;
         [Static]
@@ -1923,16 +1781,18 @@ namespace SFMCSDK
         [Export("clearLoggerFilters")]
         void ClearLoggerFilters();
 
+        // TODO: Binding errors
         // +(void)setKeychainAccessibleAttributeWithAccessibleAttribute:(CFTypeRef _Nullable)accessibleAttribute;
-        [Static]
-        [Export("setKeychainAccessibleAttributeWithAccessibleAttribute:")]
-        unsafe void SetKeychainAccessibleAttributeWithAccessibleAttribute(void* accessibleAttribute);
+        //[Static]
+        //[Export("setKeychainAccessibleAttributeWithAccessibleAttribute:")]
+        //unsafe void SetKeychainAccessibleAttributeWithAccessibleAttribute([NullAllowed] void* accessibleAttribute);
 
+        // TODO: Binding errors
         // +(CFTypeRef _Nullable)keychainAccessibleAttribute __attribute__((warn_unused_result("")));
-        [Static]
-        [Export("keychainAccessibleAttribute")]
-        // [Verify(MethodToProperty)]
-        unsafe void* KeychainAccessibleAttribute { get; }
+        //[Static]
+        //[NullAllowed, Export("keychainAccessibleAttribute")]
+        //// [Verify(MethodToProperty)]
+        //unsafe void* KeychainAccessibleAttribute { get; }
 
         // +(void)setKeychainAccessErrorsAreFatalWithErrorsAreFatal:(BOOL)errorsAreFatal;
         [Static]
@@ -1965,7 +1825,7 @@ namespace SFMCSDK
     // @interface SFMCSdkComponents : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkComponents
+    public interface SFMCSdkComponents
     {
         // @property (readonly, nonatomic, strong) SFMCSdkEncryptionManager * _Nonnull encryptionManager;
         [Export("encryptionManager", ArgumentSemantic.Strong)]
@@ -1986,7 +1846,7 @@ namespace SFMCSDK
 
     // @interface SFMCSdkLogger : NSObject <Logger>
     [BaseType(typeof(NSObject), Name = "_TtC7SFMCSDK13SFMCSdkLogger")]
-    interface SFMCSdkLogger : Logger
+    public interface SFMCSdkLogger : Logger
     {
         // @property (readonly, nonatomic, strong, class) SFMCSdkLogger * _Nonnull shared;
         [Static]
@@ -2021,14 +1881,14 @@ namespace SFMCSDK
 
     // @interface SFMCSdkScreenEntry : SFMCSdkBehavior
     [BaseType(typeof(SFMCSdkBehavior))]
-    interface SFMCSdkScreenEntry
+    public interface SFMCSdkScreenEntry
     {
     }
 
     // @interface SFMCSdkSecurePrefs : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkSecurePrefs
+    public interface SFMCSdkSecurePrefs
     {
         // -(void)setString:(NSString * _Nonnull)value for:(NSString * _Nonnull)key;
         [Export("setString:for:")]
@@ -2071,7 +1931,7 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithCatalogObject:(SFMCSdkCatalogObject * _Nonnull)catalogObject __attribute__((objc_designated_initializer));
         [Export("initWithCatalogObject:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkCatalogObject catalogObject);
+        NativeHandle Constructor(SFMCSdkCatalogObject catalogObject);
     }
 
     // @interface SFMCSdkShipOrderEvent : SFMCSdkOrderEvent
@@ -2081,13 +1941,13 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithOrder:(SFMCSdkOrder * _Nonnull)order __attribute__((objc_designated_initializer));
         [Export("initWithOrder:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkOrder order);
+        NativeHandle Constructor(SFMCSdkOrder order);
     }
 
     // @interface SFMCSdkStorageManager : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkStorageManager
+    public interface SFMCSdkStorageManager
     {
         // -(NSString * _Nonnull)getRegistrationId __attribute__((warn_unused_result("")));
         [Export("getRegistrationId")]
@@ -2102,16 +1962,18 @@ namespace SFMCSDK
         [Export("getFilenameForModuleInstallationWithFileName:")]
         string GetFilenameForModuleInstallationWithFileName(string fileName);
 
+        // TODO: Binding errors
         // +(void)setKeychainAccessibilityAttributeWithAccessibleAttribute:(CFTypeRef _Nullable)accessibleAttribute;
-        [Static]
-        [Export("setKeychainAccessibilityAttributeWithAccessibleAttribute:")]
-        unsafe void SetKeychainAccessibilityAttributeWithAccessibleAttribute(void* accessibleAttribute);
+        //[Static]
+        //[Export("setKeychainAccessibilityAttributeWithAccessibleAttribute:")]
+        //unsafe void SetKeychainAccessibilityAttributeWithAccessibleAttribute([NullAllowed] void* accessibleAttribute);
 
+        // TODO: Binding errors
         // +(CFTypeRef _Nullable)keychainAccessibilityAttribute __attribute__((warn_unused_result("")));
-        [Static]
-        [Export("keychainAccessibilityAttribute")]
-        // [Verify(MethodToProperty)]
-        unsafe void* KeychainAccessibilityAttribute { get; }
+        //[Static]        
+        //[NullAllowed, Export("keychainAccessibilityAttribute")]
+        //// [Verify(MethodToProperty)]
+        //unsafe void* KeychainAccessibilityAttribute { get; }
 
         // +(void)setKeychainAccessErrorsAreFatalWithErrorsAreFatal:(BOOL)errorsAreFatal;
         [Static]
@@ -2147,7 +2009,7 @@ namespace SFMCSDK
       be used.
     */
     [Protocol(Name = "_TtP7SFMCSDK10Subscriber_")]
-    interface Subscriber
+    public interface Subscriber
     {
         // @required @property (readonly, nonatomic) enum SFMCSdkModuleName name;
         [Abstract]
@@ -2184,12 +2046,12 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithName:(NSString * _Nonnull)name attributes:(NSDictionary<NSString *,id> * _Nullable)attributes __attribute__((objc_designated_initializer));
         [Export("initWithName:attributes:")]
         [DesignatedInitializer]
-        IntPtr Constructor(string name, [NullAllowed] NSDictionary<NSString, NSObject> attributes);
+        NativeHandle Constructor(string name, [NullAllowed] NSDictionary<NSString, NSObject> attributes);
     }
 
     // @protocol SFMCSdkURLHandlingDelegate
-    [Protocol, Model(AutoGeneratedName = false)]
-    interface SFMCSdkURLHandlingDelegate
+    [Protocol, Model(AutoGeneratedName = true)]
+    public interface SFMCSdkURLHandlingDelegate
     {
         // @required -(void)sfmc_handleURL:(NSURL * _Nonnull)url type:(NSString * _Nonnull)type;
         [Abstract]
@@ -2199,28 +2061,28 @@ namespace SFMCSDK
 
     // @interface SFMCSdkViewCatalogObjectDetailEvent : SFMCSdkCatalogObjectEvent
     [BaseType(typeof(SFMCSdkCatalogObjectEvent))]
-    interface SFMCSdkViewCatalogObjectDetailEvent
+    public interface SFMCSdkViewCatalogObjectDetailEvent
     {
         // -(instancetype _Nonnull)initWithCatalogObject:(SFMCSdkCatalogObject * _Nonnull)catalogObject __attribute__((objc_designated_initializer));
         [Export("initWithCatalogObject:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkCatalogObject catalogObject);
+        NativeHandle Constructor(SFMCSdkCatalogObject catalogObject);
     }
 
     // @interface SFMCSdkViewCatalogObjectEvent : SFMCSdkCatalogObjectEvent
     [BaseType(typeof(SFMCSdkCatalogObjectEvent))]
-    interface SFMCSdkViewCatalogObjectEvent
+    public interface SFMCSdkViewCatalogObjectEvent
     {
         // -(instancetype _Nonnull)initWithCatalogObject:(SFMCSdkCatalogObject * _Nonnull)catalogObject __attribute__((objc_designated_initializer));
         [Export("initWithCatalogObject:")]
         [DesignatedInitializer]
-        IntPtr Constructor(SFMCSdkCatalogObject catalogObject);
+        NativeHandle Constructor(SFMCSdkCatalogObject catalogObject);
     }
 
     // @interface SFMCSdkWrappedRequest : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkWrappedRequest
+    public interface SFMCSdkWrappedRequest
     {
         // @property (copy, nonatomic) NSURLRequest * _Nonnull request;
         [Export("request", ArgumentSemantic.Copy)]
@@ -2241,7 +2103,7 @@ namespace SFMCSDK
 
     // @interface SFMCSdkWrappedRequestBuilder : NSObject
     [BaseType(typeof(NSObject))]
-    interface SFMCSdkWrappedRequestBuilder
+    public interface SFMCSdkWrappedRequestBuilder
     {
         // -(SFMCSdkWrappedRequestBuilder * _Nonnull)method:(NSString * _Nonnull)method __attribute__((warn_unused_result("")));
         [Export("method:")]
@@ -2281,14 +2143,14 @@ namespace SFMCSDK
 
         // -(SFMCSdkWrappedRequest * _Nullable)build __attribute__((warn_unused_result("")));
         [NullAllowed, Export("build")]
-        // [Verify(MethodToProperty)]
+        //// [Verify(MethodToProperty)]
         SFMCSdkWrappedRequest Build { get; }
     }
 
     // @interface SFMCSdkWrappedResponse : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface SFMCSdkWrappedResponse
+    public interface SFMCSdkWrappedResponse
     {
         // @property (readonly, copy, nonatomic) NSData * _Nullable data;
         [NullAllowed, Export("data", ArgumentSemantic.Copy)]
@@ -2317,6 +2179,6 @@ namespace SFMCSDK
         // -(instancetype _Nonnull)initWithData:(NSData * _Nullable)data response:(NSURLResponse * _Nullable)response error:(NSError * _Nullable)error startTimeMillis:(int64_t)startTimeMillis endTimeMillis:(int64_t)endTimeMillis __attribute__((objc_designated_initializer));
         [Export("initWithData:response:error:startTimeMillis:endTimeMillis:")]
         [DesignatedInitializer]
-        IntPtr Constructor([NullAllowed] NSData data, [NullAllowed] NSUrlResponse response, [NullAllowed] NSError error, long startTimeMillis, long endTimeMillis);
+        NativeHandle Constructor([NullAllowed] NSData data, [NullAllowed] NSUrlResponse response, [NullAllowed] NSError error, long startTimeMillis, long endTimeMillis);
     }
 }

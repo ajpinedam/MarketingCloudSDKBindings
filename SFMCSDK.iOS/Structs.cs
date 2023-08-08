@@ -116,4 +116,9 @@ namespace SFMCSDK
         Success = 2,
         Timeout = 3
     }
+
+    public interface ii : SFMCSdkEvent
+    {
+
+    }
 }
