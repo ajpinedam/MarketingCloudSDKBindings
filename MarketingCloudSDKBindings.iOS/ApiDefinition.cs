@@ -823,15 +823,15 @@ namespace MarketingCloudSDK
         SFMCSdkPushModule Shared { get; }
 
         // @property (readonly, nonatomic, strong, class) SFMCSdkModuleLogger * _Nonnull logger;
-        //[Static]
-        //[Export("logger", ArgumentSemantic.Strong)]
-        //SFMCSdkModuleLogger Logger { get; }
+        [Static]
+        [Export("logger", ArgumentSemantic.Strong)]
+        SFMCSdkModuleLogger Logger { get; }
 
         // +(SFMCSdkModuleLogger * _Nonnull)getLogger __attribute__((warn_unused_result("")));
         [Static]
         [Export("getLogger")]
         // [Verify(MethodToProperty)]
-        SFMCSdkModuleLogger Logger { get; }
+        SFMCSdkModuleLogger GetLogger();
 
         // -(id<SFMCSdkModuleIdentity> _Nullable)getIdentity __attribute__((warn_unused_result("")));
         [NullAllowed, Export("getIdentity")]
