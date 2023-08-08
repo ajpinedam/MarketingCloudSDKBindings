@@ -7,7 +7,7 @@
     <ProjectGuid>{A438D6C0-3E2F-4A50-A118-54601C60AAB9}</ProjectGuid>
     <TemplateGuid>{b6f3ff35-79b2-4f25-a2fc-60a7cf61013b}</TemplateGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SFMCSDK</RootNamespace>
+    <RootNamespace>SFMCSDK.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>SFMCSDK.iOS</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
@@ -51,6 +51,11 @@
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SFMCSDK.framework\Info.plist">
+      <Link>Resources\Info.plist</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>

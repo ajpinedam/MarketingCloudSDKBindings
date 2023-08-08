@@ -2,9 +2,13 @@
 using CoreLocation;
 using Foundation;
 using ObjCRuntime;
-using SFMCSDK;
+using SFMCSDK.iOS;
 using UIKit;
 using UserNotifications;
+
+#if !NET
+using NativeHandle = System.IntPtr;
+#endif
 
 namespace MarketingCloudSDK
 {
@@ -36,7 +40,7 @@ namespace MarketingCloudSDK
 
         // -(NSString * _Nullable)sfmc_contactKey;
         [NullAllowed, Export("sfmc_contactKey")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string Sfmc_contactKey { get; }
 
         // -(BOOL)sfmc_addTag:(NSString * _Nonnull)tag;
@@ -49,19 +53,19 @@ namespace MarketingCloudSDK
 
         // -(NSSet * _Nullable)sfmc_addTags:(NSArray * _Nonnull)tags;
         [Export("sfmc_addTags:")]
-        [Verify(StronglyTypedNSArray)]
+        // [Verify(StronglyTypedNSArray)]
         [return: NullAllowed]
         NSSet Sfmc_addTags(NSObject[] tags);
 
         // -(NSSet * _Nullable)sfmc_removeTags:(NSArray * _Nonnull)tags;
         [Export("sfmc_removeTags:")]
-        [Verify(StronglyTypedNSArray)]
+        // [Verify(StronglyTypedNSArray)]
         [return: NullAllowed]
         NSSet Sfmc_removeTags(NSObject[] tags);
 
         // -(NSSet * _Nullable)sfmc_tags;
         [NullAllowed, Export("sfmc_tags")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         NSSet Sfmc_tags { get; }
 
         // -(BOOL)sfmc_setAttributeNamed:(NSString * _Nonnull)name value:(NSString * _Nonnull)value;
@@ -74,18 +78,18 @@ namespace MarketingCloudSDK
 
         // -(NSDictionary * _Nullable)sfmc_attributes;
         [NullAllowed, Export("sfmc_attributes")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         NSDictionary Sfmc_attributes { get; }
 
         // -(NSDictionary * _Nullable)sfmc_setAttributes:(NSArray * _Nonnull)attributes;
         [Export("sfmc_setAttributes:")]
-        [Verify(StronglyTypedNSArray)]
+        // [Verify(StronglyTypedNSArray)]
         [return: NullAllowed]
         NSDictionary Sfmc_setAttributes(NSObject[] attributes);
 
         // -(NSDictionary * _Nullable)sfmc_clearAttributesNamed:(NSArray * _Nonnull)attributeNames;
         [Export("sfmc_clearAttributesNamed:")]
-        [Verify(StronglyTypedNSArray)]
+        // [Verify(StronglyTypedNSArray)]
         [return: NullAllowed]
         NSDictionary Sfmc_clearAttributesNamed(NSObject[] attributeNames);
 
@@ -95,22 +99,22 @@ namespace MarketingCloudSDK
 
         // -(NSString * _Nullable)sfmc_deviceToken;
         [NullAllowed, Export("sfmc_deviceToken")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string Sfmc_deviceToken { get; }
 
         // -(NSString * _Nullable)sfmc_appID;
         [NullAllowed, Export("sfmc_appID")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string Sfmc_appID { get; }
 
         // -(NSString * _Nullable)sfmc_accessToken;
         [NullAllowed, Export("sfmc_accessToken")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string Sfmc_accessToken { get; }
 
         // -(NSString * _Nullable)sfmc_deviceIdentifier;
         [NullAllowed, Export("sfmc_deviceIdentifier")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string Sfmc_deviceIdentifier { get; }
 
         // -(void)sfmc_setNotificationRequest:(UNNotificationRequest * _Nonnull)request __attribute__((availability(ios, introduced=10)));
@@ -121,7 +125,7 @@ namespace MarketingCloudSDK
         // -(UNNotificationRequest * _Nonnull)sfmc_notificationRequest __attribute__((availability(ios, introduced=10)));
         [iOS(10, 0)]
         [Export("sfmc_notificationRequest")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         UNNotificationRequest Sfmc_notificationRequest { get; }
 
         // -(void)sfmc_setNotificationUserInfo:(NSDictionary * _Nonnull)userInfo;
@@ -130,7 +134,7 @@ namespace MarketingCloudSDK
 
         // -(NSDictionary * _Nonnull)sfmc_notificationUserInfo;
         [Export("sfmc_notificationUserInfo")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         NSDictionary Sfmc_notificationUserInfo { get; }
 
         // -(void)sfmc_setPushEnabled:(BOOL)pushEnabled;
@@ -139,12 +143,12 @@ namespace MarketingCloudSDK
 
         // -(BOOL)sfmc_pushEnabled;
         [Export("sfmc_pushEnabled")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         bool Sfmc_pushEnabled { get; }
 
         // -(NSString * _Nullable)sfmc_getSDKState __attribute__((swift_name("sfmc_getSDKState()")));
         [NullAllowed, Export("sfmc_getSDKState")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string Sfmc_getSDKState { get; }
 
         // -(void)sfmc_setDebugLoggingEnabled:(BOOL)enabled;
@@ -153,7 +157,7 @@ namespace MarketingCloudSDK
 
         // -(BOOL)sfmc_getDebugLoggingEnabled;
         [Export("sfmc_getDebugLoggingEnabled")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         bool Sfmc_getDebugLoggingEnabled { get; }
 
         // -(BOOL)sfmc_refreshWithFetchCompletionHandler:(void (^ _Nullable)(UIBackgroundFetchResult))completionHandler;
@@ -174,22 +178,22 @@ namespace MarketingCloudSDK
 
         // -(NSString * _Nullable)sfmc_signedString;
         [NullAllowed, Export("sfmc_signedString")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string Sfmc_signedString { get; }
 
         // -(BOOL)sfmc_isReady;
         [Export("sfmc_isReady")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         bool Sfmc_isReady { get; }
 
         // -(BOOL)sfmc_isInitializing;
         [Export("sfmc_isInitializing")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         bool Sfmc_isInitializing { get; }
 
         // -(BOOL)sfmc_resetDataPolicy;
         [Export("sfmc_resetDataPolicy")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         bool Sfmc_resetDataPolicy { get; }
     }
 
@@ -205,30 +209,30 @@ namespace MarketingCloudSDK
     */
     [Protocol]
     [BaseType(typeof(NSObject))]
-    interface SFMCEvent
+    partial interface SFMCEvent
     {
         // @required -(NSString * _Nonnull)key;
         [Abstract]
         [Export("key")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string Key { get; }
 
         // @required -(NSString * _Nullable)eventId;
         [Abstract]
         [NullAllowed, Export("eventId")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string EventId { get; }
 
         // @required -(NSDictionary<NSString *,id> * _Nullable)parameters;
         [Abstract]
         [NullAllowed, Export("parameters")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         NSDictionary<NSString, NSObject> Parameters { get; }
     }
 
     // @interface SFMCEvent : NSObject
-    [BaseType(typeof(NSObject))]
-    interface SFMCEvent
+    //[BaseType(typeof(NSObject))]
+    partial interface SFMCEvent
     {
         // +(id<SFMCEvent> _Nullable)customEventWithName:(NSString * _Nonnull)key;
         [Static]
@@ -278,8 +282,8 @@ namespace MarketingCloudSDK
 
         // -(NSString * _Nullable)sfmc_piIdentifier;
         [NullAllowed, Export("sfmc_piIdentifier")]
-        [Verify(MethodToProperty)]
-        string Sfmc_piIdentifier { get; }
+        // [Verify(MethodToProperty)]
+        string Sfmc_piIdentifier();
 
         // -(void)sfmc_trackMessageOpened:(NSDictionary * _Nonnull)inboxMessage;
         [Export("sfmc_trackMessageOpened:")]
@@ -304,7 +308,7 @@ namespace MarketingCloudSDK
 
         // -(NSDictionary * _Nullable)sfmc_cartDictionaryWithCartItemDictionaryArray:(NSArray * _Nonnull)cartItemDictionaryArray;
         [Export("sfmc_cartDictionaryWithCartItemDictionaryArray:")]
-        [Verify(StronglyTypedNSArray)]
+        // [Verify(StronglyTypedNSArray)]
         [return: NullAllowed]
         NSDictionary Sfmc_cartDictionaryWithCartItemDictionaryArray(NSObject[] cartItemDictionaryArray);
 
@@ -315,7 +319,7 @@ namespace MarketingCloudSDK
     }
 
     [Static]
-    [Verify(ConstantsInterfaceAssociation)]
+    // [Verify(ConstantsInterfaceAssociation)]
     partial interface Constants
     {
         // extern NSString *const _Nonnull MarketingCloudSDKInboxMessageKey;
@@ -348,43 +352,43 @@ namespace MarketingCloudSDK
     {
         // -(NSArray * _Nullable)sfmc_getAllMessages;
         [NullAllowed, Export("sfmc_getAllMessages")]
-        [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
-        NSObject[] Sfmc_getAllMessages { get; }
+        // [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
+        NSObject[] Sfmc_getAllMessages();
 
         // -(NSArray * _Nullable)sfmc_getUnreadMessages;
         [NullAllowed, Export("sfmc_getUnreadMessages")]
-        [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
-        NSObject[] Sfmc_getUnreadMessages { get; }
+        // [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
+        NSObject[] Sfmc_getUnreadMessages();
 
         // -(NSArray * _Nullable)sfmc_getReadMessages;
         [NullAllowed, Export("sfmc_getReadMessages")]
-        [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
-        NSObject[] Sfmc_getReadMessages { get; }
+        // [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
+        NSObject[] Sfmc_getReadMessages();
 
         // -(NSArray * _Nullable)sfmc_getDeletedMessages;
         [NullAllowed, Export("sfmc_getDeletedMessages")]
-        [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
-        NSObject[] Sfmc_getDeletedMessages { get; }
+        // [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
+        NSObject[] Sfmc_getDeletedMessages();
 
         // -(NSUInteger)sfmc_getAllMessagesCount;
         [Export("sfmc_getAllMessagesCount")]
-        [Verify(MethodToProperty)]
-        nuint Sfmc_getAllMessagesCount { get; }
+        // [Verify(MethodToProperty)]
+        nuint Sfmc_getAllMessagesCount();
 
         // -(NSUInteger)sfmc_getUnreadMessagesCount;
         [Export("sfmc_getUnreadMessagesCount")]
-        [Verify(MethodToProperty)]
-        nuint Sfmc_getUnreadMessagesCount { get; }
+        // [Verify(MethodToProperty)]
+        nuint Sfmc_getUnreadMessagesCount();
 
         // -(NSUInteger)sfmc_getReadMessagesCount;
         [Export("sfmc_getReadMessagesCount")]
-        [Verify(MethodToProperty)]
-        nuint Sfmc_getReadMessagesCount { get; }
+        // [Verify(MethodToProperty)]
+        nuint Sfmc_getReadMessagesCount();
 
         // -(NSUInteger)sfmc_getDeletedMessagesCount;
         [Export("sfmc_getDeletedMessagesCount")]
-        [Verify(MethodToProperty)]
-        nuint Sfmc_getDeletedMessagesCount { get; }
+        // [Verify(MethodToProperty)]
+        nuint Sfmc_getDeletedMessagesCount();
 
         // -(BOOL)sfmc_markMessageRead:(NSDictionary * _Nonnull)messageDictionary;
         [Export("sfmc_markMessageRead:")]
@@ -404,18 +408,18 @@ namespace MarketingCloudSDK
 
         // -(BOOL)sfmc_markAllMessagesRead;
         [Export("sfmc_markAllMessagesRead")]
-        [Verify(MethodToProperty)]
-        bool Sfmc_markAllMessagesRead { get; }
+        // [Verify(MethodToProperty)]
+        bool Sfmc_markAllMessagesRead();
 
         // -(BOOL)sfmc_markAllMessagesDeleted;
         [Export("sfmc_markAllMessagesDeleted")]
-        [Verify(MethodToProperty)]
-        bool Sfmc_markAllMessagesDeleted { get; }
+        // [Verify(MethodToProperty)]
+        bool Sfmc_markAllMessagesDeleted();
 
         // -(BOOL)sfmc_refreshMessages;
         [Export("sfmc_refreshMessages")]
-        [Verify(MethodToProperty)]
-        bool Sfmc_refreshMessages { get; }
+        // [Verify(MethodToProperty)]
+        bool Sfmc_refreshMessages();
 
         // -(MarketingCloudSDKInboxMessagesDataSource * _Nullable)sfmc_inboxMessagesTableViewDataSourceForTableView:(UITableView * _Nonnull)tableView;
         [Export("sfmc_inboxMessagesTableViewDataSourceForTableView:")]
@@ -459,8 +463,8 @@ namespace MarketingCloudSDK
 
         // -(BOOL)sfmc_locationEnabled;
         [Export("sfmc_locationEnabled")]
-        [Verify(MethodToProperty)]
-        bool Sfmc_locationEnabled { get; }
+        // [Verify(MethodToProperty)]
+        bool Sfmc_locationEnabled();
 
         // -(void)sfmc_startWatchingLocation;
         [Export("sfmc_startWatchingLocation")]
@@ -472,17 +476,17 @@ namespace MarketingCloudSDK
 
         // -(BOOL)sfmc_watchingLocation;
         [Export("sfmc_watchingLocation")]
-        [Verify(MethodToProperty)]
-        bool Sfmc_watchingLocation { get; }
+        // [Verify(MethodToProperty)]
+        bool Sfmc_watchingLocation();
 
         // -(NSDictionary<NSString *,NSString *> * _Nullable)sfmc_lastKnownLocation;
         [NullAllowed, Export("sfmc_lastKnownLocation")]
-        [Verify(MethodToProperty)]
-        NSDictionary<NSString, NSString> Sfmc_lastKnownLocation { get; }
+        // [Verify(MethodToProperty)]
+        NSDictionary<NSString, NSString> Sfmc_lastKnownLocation();
     }
 
-    [Static]
-    [Verify(ConstantsInterfaceAssociation)]
+    //[Static]
+    // [Verify(ConstantsInterfaceAssociation)]
     partial interface Constants
     {
         // extern NSString *const _Nonnull MarketingCloudSDKErrorDomain;
@@ -566,8 +570,8 @@ namespace MarketingCloudSDK
         NSString SFMCFrameworkDidBlockNotification { get; }
     }
 
-    [Static]
-    [Verify(ConstantsInterfaceAssociation)]
+    //[Static]
+    // [Verify(ConstantsInterfaceAssociation)]
     partial interface Constants
     {
         // extern NSString *const _Nonnull SFMCURLTypeCloudPage;
@@ -663,7 +667,7 @@ namespace MarketingCloudSDK
     {
         // -(NSDictionary * _Nullable)sfmc_build;
         [NullAllowed, Export("sfmc_build")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         NSDictionary Sfmc_build { get; }
 
         // -(instancetype _Nonnull)sfmc_setApplicationId:(NSString * _Nonnull)setApplicationId;
@@ -785,7 +789,7 @@ namespace MarketingCloudSDK
 
         // -(PushConfig * _Nonnull)build;
         [Export("build")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         PushConfig Build { get; }
     }
 
@@ -819,19 +823,19 @@ namespace MarketingCloudSDK
         SFMCSdkPushModule Shared { get; }
 
         // @property (readonly, nonatomic, strong, class) SFMCSdkModuleLogger * _Nonnull logger;
-        [Static]
-        [Export("logger", ArgumentSemantic.Strong)]
-        SFMCSdkModuleLogger Logger { get; }
+        //[Static]
+        //[Export("logger", ArgumentSemantic.Strong)]
+        //SFMCSdkModuleLogger Logger { get; }
 
         // +(SFMCSdkModuleLogger * _Nonnull)getLogger __attribute__((warn_unused_result("")));
         [Static]
         [Export("getLogger")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         SFMCSdkModuleLogger Logger { get; }
 
         // -(id<SFMCSdkModuleIdentity> _Nullable)getIdentity __attribute__((warn_unused_result("")));
         [NullAllowed, Export("getIdentity")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         SFMCSdkModuleIdentity Identity { get; }
 
         // -(void)receiveWithMessage:(SFMCSdkMessage * _Nonnull)message;
@@ -861,7 +865,7 @@ namespace MarketingCloudSDK
         // +(NSDictionary<NSString *,id> * _Nonnull)metadata __attribute__((warn_unused_result("")));
         [Static]
         [Export("metadata")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         NSDictionary<NSString, NSObject> Metadata { get; }
 
         // -(void)tearDown __attribute__((deprecated("This method will be removed as the Push Module will automatically handle tear downs upon initializations")));
@@ -870,7 +874,7 @@ namespace MarketingCloudSDK
 
         // -(NSString * _Nullable)contactKey __attribute__((warn_unused_result("")));
         [NullAllowed, Export("contactKey")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string ContactKey { get; }
 
         // -(BOOL)addTag:(NSString * _Nonnull)tag __attribute__((warn_unused_result("")));
@@ -879,7 +883,7 @@ namespace MarketingCloudSDK
 
         // -(NSSet * _Nullable)addTags:(NSArray * _Nonnull)tags __attribute__((warn_unused_result("")));
         [Export("addTags:")]
-        [Verify(StronglyTypedNSArray)]
+        // [Verify(StronglyTypedNSArray)]
         [return: NullAllowed]
         NSSet AddTags(NSObject[] tags);
 
@@ -889,7 +893,7 @@ namespace MarketingCloudSDK
 
         // -(NSSet * _Nullable)tags __attribute__((warn_unused_result("")));
         [NullAllowed, Export("tags")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         NSSet Tags { get; }
 
         // -(void)setDeviceToken:(NSData * _Nonnull)deviceToken;
@@ -902,40 +906,40 @@ namespace MarketingCloudSDK
 
         // -(NSString * _Nullable)deviceToken __attribute__((warn_unused_result("")));
         [NullAllowed, Export("deviceToken")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string DeviceToken { get; }
 
         // -(NSDictionary * _Nullable)attributes __attribute__((warn_unused_result("")));
         [NullAllowed, Export("attributes")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         NSDictionary Attributes { get; }
 
         // -(NSString * _Nullable)accessToken __attribute__((warn_unused_result("")));
         [NullAllowed, Export("accessToken")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string AccessToken { get; }
 
         // -(NSString * _Nullable)deviceIdentifier __attribute__((warn_unused_result("")));
         [NullAllowed, Export("deviceIdentifier")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string DeviceIdentifier { get; }
 
         // -(UNNotificationRequest * _Nullable)notificationRequest __attribute__((warn_unused_result("")));
         // -(void)setNotificationRequest:(UNNotificationRequest * _Nonnull)request;
         [NullAllowed, Export("notificationRequest")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         UNNotificationRequest NotificationRequest { get; set; }
 
         // -(NSDictionary * _Nonnull)notificationUserInfo __attribute__((warn_unused_result("")));
         // -(void)setNotificationUserInfo:(NSDictionary * _Nonnull)userInfo;
         [Export("notificationUserInfo")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         NSDictionary NotificationUserInfo { get; set; }
 
         // -(BOOL)pushEnabled __attribute__((warn_unused_result("")));
         // -(void)setPushEnabled:(BOOL)pushEnabled;
         [Export("pushEnabled")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         bool PushEnabled { get; set; }
 
         // -(BOOL)refreshWithFetchCompletionHandler:(void (^ _Nullable)(UIBackgroundFetchResult))completionHandler __attribute__((warn_unused_result("")));
@@ -956,7 +960,7 @@ namespace MarketingCloudSDK
 
         // -(NSString * _Nullable)signedString __attribute__((warn_unused_result("")));
         [NullAllowed, Export("signedString")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string SignedString { get; }
 
         // -(void)setEventDelegate:(id<SFMCSdkInAppMessageEventDelegate> _Nullable)delegate;
@@ -978,42 +982,42 @@ namespace MarketingCloudSDK
 
         // -(NSArray * _Nullable)getAllMessages __attribute__((warn_unused_result("")));
         [NullAllowed, Export("getAllMessages")]
-        [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
+        // [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
         NSObject[] AllMessages { get; }
 
         // -(NSArray * _Nullable)getUnreadMessages __attribute__((warn_unused_result("")));
         [NullAllowed, Export("getUnreadMessages")]
-        [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
+        // [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
         NSObject[] UnreadMessages { get; }
 
         // -(NSArray * _Nullable)getReadMessages __attribute__((warn_unused_result("")));
         [NullAllowed, Export("getReadMessages")]
-        [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
+        // [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
         NSObject[] ReadMessages { get; }
 
         // -(NSArray * _Nullable)getDeletedMessages __attribute__((warn_unused_result("")));
         [NullAllowed, Export("getDeletedMessages")]
-        [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
+        // [Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
         NSObject[] DeletedMessages { get; }
 
         // -(NSUInteger)getAllMessagesCount __attribute__((warn_unused_result("")));
         [Export("getAllMessagesCount")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         nuint AllMessagesCount { get; }
 
         // -(NSUInteger)getUnreadMessagesCount __attribute__((warn_unused_result("")));
         [Export("getUnreadMessagesCount")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         nuint UnreadMessagesCount { get; }
 
         // -(NSUInteger)getReadMessagesCount __attribute__((warn_unused_result("")));
         [Export("getReadMessagesCount")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         nuint ReadMessagesCount { get; }
 
         // -(NSUInteger)getDeletedMessagesCount __attribute__((warn_unused_result("")));
         [Export("getDeletedMessagesCount")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         nuint DeletedMessagesCount { get; }
 
         // -(BOOL)markMessageRead:(NSDictionary * _Nonnull)messageDictionary __attribute__((warn_unused_result("")));
@@ -1034,17 +1038,17 @@ namespace MarketingCloudSDK
 
         // -(BOOL)markAllMessagesRead __attribute__((warn_unused_result("")));
         [Export("markAllMessagesRead")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         bool MarkAllMessagesRead { get; }
 
         // -(BOOL)markAllMessagesDeleted __attribute__((warn_unused_result("")));
         [Export("markAllMessagesDeleted")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         bool MarkAllMessagesDeleted { get; }
 
         // -(BOOL)refreshMessages __attribute__((warn_unused_result("")));
         [Export("refreshMessages")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         bool RefreshMessages { get; }
 
         // -(id<SFMCSdkInboxMessagesDataSource> _Nullable)inboxMessagesTableViewDataSourceForTableView:(UITableView * _Nonnull)tableView __attribute__((warn_unused_result("")));
@@ -1063,7 +1067,7 @@ namespace MarketingCloudSDK
 
         // -(NSString * _Nullable)piIdentifier __attribute__((warn_unused_result("")));
         [NullAllowed, Export("piIdentifier")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         string PiIdentifier { get; }
 
         // -(void)trackMessageOpened:(NSDictionary * _Nonnull)inboxMessage;
@@ -1089,7 +1093,7 @@ namespace MarketingCloudSDK
 
         // -(NSDictionary * _Nullable)cartDictionaryWithCartItem:(NSArray * _Nonnull)cartItem __attribute__((warn_unused_result("")));
         [Export("cartDictionaryWithCartItem:")]
-        [Verify(StronglyTypedNSArray)]
+        // [Verify(StronglyTypedNSArray)]
         [return: NullAllowed]
         NSDictionary CartDictionaryWithCartItem(NSObject[] cartItem);
 
@@ -1109,7 +1113,7 @@ namespace MarketingCloudSDK
 
         // -(BOOL)locationEnabled __attribute__((warn_unused_result("")));
         [Export("locationEnabled")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         bool LocationEnabled { get; }
 
         // -(void)startWatchingLocation;
@@ -1122,12 +1126,12 @@ namespace MarketingCloudSDK
 
         // -(BOOL)watchingLocation __attribute__((warn_unused_result("")));
         [Export("watchingLocation")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         bool WatchingLocation { get; }
 
         // -(NSDictionary<NSString *,NSString *> * _Nullable)lastKnownLocation __attribute__((warn_unused_result("")));
         [NullAllowed, Export("lastKnownLocation")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         NSDictionary<NSString, NSString> LastKnownLocation { get; }
 
         // -(void)setURLHandlingDelegate:(id<SFMCSdkURLHandlingDelegate> _Nullable)delegate;
@@ -1135,14 +1139,13 @@ namespace MarketingCloudSDK
         void SetURLHandlingDelegate([NullAllowed] SFMCSdkURLHandlingDelegate @delegate);
 
         // +(id<SFMCModule> _Nullable)initModuleWithConfig:(id<SFMCSdkModuleConfig> _Nonnull)config components:(SFMCSdkComponents * _Nonnull)components __attribute__((objc_method_family("none"))) __attribute__((warn_unused_result("")));
-        [Static]
         [Export("initModuleWithConfig:components:")]
         [return: NullAllowed]
-        SFMCModule InitModuleWithConfig(SFMCSdkModuleConfig config, SFMCSdkComponents components);
+        SFMCModule Components(SFMCSdkModuleConfig config, SFMCSdkComponents components);
 
         // -(BOOL)resetDataPolicy __attribute__((warn_unused_result("")));
         [Export("resetDataPolicy")]
-        [Verify(MethodToProperty)]
+        // [Verify(MethodToProperty)]
         bool ResetDataPolicy { get; }
     }
 }

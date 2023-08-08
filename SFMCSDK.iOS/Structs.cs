@@ -1,6 +1,6 @@
 ﻿using ObjCRuntime;
 
-namespace SFMCSDK
+namespace SFMCSDK.iOS
 {
     [Native]
     public enum SFKeychainItemExceptionErrorCode : ulong
@@ -115,10 +115,5 @@ namespace SFMCSDK
         Error = 1,
         Success = 2,
         Timeout = 3
-    }
-
-    public interface ii : SFMCSdkEvent
-    {
-
     }
 }
