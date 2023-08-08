@@ -415,7 +415,7 @@ namespace SFMCSDK.iOS
         // -(SFMCSdkConfig * _Nonnull)build __attribute__((warn_unused_result("")));
         [Export("build")]
         // [Verify(MethodToProperty)]
-        SFMCSdkConfig Build { get; }
+        SFMCSdkConfig Build();
     }
 
     // @protocol SFMCSdkCoordinates
@@ -2159,7 +2159,7 @@ namespace SFMCSDK.iOS
         // -(SFMCSdkWrappedRequest * _Nullable)build __attribute__((warn_unused_result("")));
         [NullAllowed, Export("build")]
         //// [Verify(MethodToProperty)]
-        SFMCSdkWrappedRequest Build { get; }
+        SFMCSdkWrappedRequest Build();
     }
 
     // @interface SFMCSdkWrappedResponse : NSObject

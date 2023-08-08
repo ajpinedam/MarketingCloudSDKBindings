@@ -790,7 +790,7 @@ namespace MarketingCloudSDK
         // -(PushConfig * _Nonnull)build;
         [Export("build")]
         // [Verify(MethodToProperty)]
-        PushConfig Build { get; }
+        PushConfig Build();
     }
 
     // @interface SFMCSdkPushModule : NSObject <PushInterface, SFMCModule, Subscriber>
