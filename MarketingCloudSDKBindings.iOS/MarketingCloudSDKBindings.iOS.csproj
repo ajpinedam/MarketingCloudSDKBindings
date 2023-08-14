@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="MarketingCloudSDK.bundle\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,6 +58,41 @@
       <Project>{A438D6C0-3E2F-4A50-A118-54601C60AAB9}</Project>
       <Name>SFMCSDK.iOS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MarketingCloudSDK.bundle\Assets.car" />
+    <None Include="MarketingCloudSDK.bundle\Info.plist" />
+    <None Include="MarketingCloudSDK.bundle\_CodeSignature\CodeResources" />
+    <None Include="MarketingCloudSDK.bundle\_CodeSignature\CodeDirectory" />
+    <None Include="MarketingCloudSDK.bundle\_CodeSignature\CodeRequirements-1" />
+    <None Include="MarketingCloudSDK.bundle\_CodeSignature\CodeSignature" />
+    <None Include="MarketingCloudSDK.bundle\_CodeSignature\CodeRequirements" />
+    <None Include="MarketingCloudSDK.bundle\en.lproj\MarketingCloudSDK.strings" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\VersionInfo.plist" />
+    <None Include="MarketingCloudSDK.bundle\InAppMessageUI.storyboardc\InAppMessageUIViewController.nib" />
+    <None Include="MarketingCloudSDK.bundle\InAppMessageUI.storyboardc\P8f-fg-jwy-view-Xyz-2s-9Ez.nib" />
+    <None Include="MarketingCloudSDK.bundle\InAppMessageUI.storyboardc\Info.plist" />
+    <None Include="MarketingCloudSDK.bundle\SFMCEventConfigurationEntity+CoreDataClass.h" />
+    <None Include="MarketingCloudSDK.bundle\SFMCEndpointConfigurationEntity+CoreDataProperties.h" />
+    <None Include="MarketingCloudSDK.bundle\SFMCEventConfigurationEntity+CoreDataProperties.h" />
+    <None Include="MarketingCloudSDK.bundle\SFMCEndpointConfigurationEntity+CoreDataClass.h" />
+    <None Include="MarketingCloudSDK.bundle\SFMCConfigurationEntity+CoreDataClass.h" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel+CoreDataModel.h" />
+    <None Include="MarketingCloudSDK.bundle\SFMCConfigurationEntity+CoreDataProperties.h" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\219.02.mom" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\219.01.mom" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\240.00.mom" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\215.00.mom" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\240.01.mom" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\219.00.mom" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\234.00.mom" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\240.01.omo" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\SFMCModel.mom" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\216.03.mom" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\216.02.mom" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\216.00.mom" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\216.01.mom" />
+    <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\214.00.mom" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>
