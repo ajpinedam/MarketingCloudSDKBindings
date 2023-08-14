@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using CoreLocation;
 using Foundation;
 using ObjCRuntime;
@@ -11,44 +11,6 @@ using NativeHandle = System.IntPtr;
 
 namespace SFMCSDK.iOS
 {
-    [Static]
-    // [Verify(ConstantsInterfaceAssociation)]
-    partial interface Constants
-    {
-        // extern NSString *const _Nullable kSFKeychainItemExceptionType;
-        [Field("kSFKeychainItemExceptionType", "__Internal")]
-        [NullAllowed]
-        NSString kSFKeychainItemExceptionType { get; }
-
-        // extern NSString *const _Nullable kSFKeychainItemExceptionErrorCodeKey;
-        [Field("kSFKeychainItemExceptionErrorCodeKey", "__Internal")]
-        [NullAllowed]
-        NSString kSFKeychainItemExceptionErrorCodeKey { get; }
-    }
-
-    // @interface  (UIViewController)
-    [Category]
-    [BaseType(typeof(UIViewController))]
-    public interface UIViewController_
-    {
-        // +(void)swizzleViewDidAppearForScreenTracking;
-        [Static]
-        [Export("swizzleViewDidAppearForScreenTracking")]
-        void SwizzleViewDidAppearForScreenTracking();
-    }
-
-    // [Verify(ConstantsInterfaceAssociation)]
-    public partial interface Constants
-    {
-        // extern double SFMCSdkVersionNumber;
-        [Field("SFMCSdkVersionNumber", "__Internal")]
-        double SFMCSdkVersionNumber { get; }
-
-        // extern const unsigned char[] SFMCSdkVersionString;
-        [Field("SFMCSdkVersionString", "__Internal")]
-        NSString SFMCSdkVersionString { get; }
-    }
-
     // @protocol SFMCSdkEvent
     /*
       Check whether adding [Model] to this declaration is appropriate.
