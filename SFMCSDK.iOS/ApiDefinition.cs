@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CoreLocation;
 using Foundation;
 using ObjCRuntime;
@@ -406,16 +406,20 @@ namespace SFMCSDK.iOS
     {
         // -(SFMCSdkConfigBuilder * _Nonnull)setCdpWithConfig:(id<SFMCSdkModuleConfig> _Nonnull)config onCompletion:(void (^ _Nullable)(enum SFMCSdkOperationResult))onCompletion __attribute__((warn_unused_result("")));
         [Export("setCdpWithConfig:onCompletion:")]
-        SFMCSdkConfigBuilder SetCdpWithConfig(SFMCSdkModuleConfig config, [NullAllowed] Action<SFMCSdkOperationResult> onCompletion);
+        SFMCSdkConfigBuilder SetCdpWithConfig(ISFMCSdkModuleConfig config, [NullAllowed] Action<SFMCSdkOperationResult> onCompletion);
 
         // -(SFMCSdkConfigBuilder * _Nonnull)setPushWithConfig:(id<SFMCSdkModuleConfig> _Nonnull)config onCompletion:(void (^ _Nullable)(enum SFMCSdkOperationResult))onCompletion __attribute__((warn_unused_result("")));
         [Export("setPushWithConfig:onCompletion:")]
-        SFMCSdkConfigBuilder SetPushWithConfig(SFMCSdkModuleConfig config, [NullAllowed] Action<SFMCSdkOperationResult> onCompletion);
+        SFMCSdkConfigBuilder SetPushWithConfig(ISFMCSdkModuleConfig config, [NullAllowed] Action<SFMCSdkOperationResult> onCompletion);
 
         // -(SFMCSdkConfig * _Nonnull)build __attribute__((warn_unused_result("")));
         [Export("build")]
         // [Verify(MethodToProperty)]
         SFMCSdkConfig Build();
+    }
+
+    public interface ISFMCSdkModuleConfig
+    {
     }
 
     // @protocol SFMCSdkCoordinates
@@ -810,7 +814,7 @@ namespace SFMCSDK.iOS
       be used.
     */
     [Protocol]
-    [BaseType(typeof(NSObject), Name = "SFMCSdkModuleConfig")]
+    [BaseType(typeof(NSObject))]
     public interface SFMCSdkModuleConfig
     {
         // @required @property (readonly, nonatomic) enum SFMCSdkModuleName name;

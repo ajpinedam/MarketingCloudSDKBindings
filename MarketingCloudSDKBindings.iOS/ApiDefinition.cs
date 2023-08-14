@@ -718,7 +718,7 @@ namespace MarketingCloudSDK
     // @interface PushConfig : NSObject <SFMCSdkModuleConfig>
     [BaseType(typeof(NSObject), Name = "_TtC17MarketingCloudSDK10PushConfig")]
     [DisableDefaultCtor]
-    interface PushConfig : ISFMCSdkModuleConfig
+    public interface PushConfig : ISFMCSdkModuleConfig
     {
         // @property (nonatomic) BOOL trackScreens;
         [Export("trackScreens")]
