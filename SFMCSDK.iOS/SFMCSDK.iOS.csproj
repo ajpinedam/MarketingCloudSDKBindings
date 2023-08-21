@@ -47,15 +47,17 @@
     <ObjcBindingCoreSource Include="Structs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="SFMCSDK.framework">
+    <NativeReference Include="SFMCSDK.xcframework\ios-arm64\SFMCSDK.framework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
+      <ForceLoad>True</ForceLoad>
+      <LinkerFlags>-ObjC</LinkerFlags>
     </NativeReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SFMCSDK.framework\Info.plist">
+    <BundleResource Include="SFMCSDK.xcframework\ios-arm64\SFMCSDK.framework\Info.plist">
       <Link>Resources\Info.plist</Link>
-    </None>
+    </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>

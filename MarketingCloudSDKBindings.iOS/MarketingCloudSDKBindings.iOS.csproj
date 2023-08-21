@@ -48,9 +48,11 @@
     <ObjcBindingCoreSource Include="Structs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="MarketingCloudSDK.framework">
+    <NativeReference Include="MarketingCloudSDK.xcframework\ios-arm64\MarketingCloudSDK.framework">
       <Kind>Framework</Kind>
-      <SmartLink>False</SmartLink>
+      <SmartLink>True</SmartLink>
+      <ForceLoad>True</ForceLoad>
+      <LinkerFlags>-ObjC</LinkerFlags>
     </NativeReference>
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +95,11 @@
     <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\216.00.mom" />
     <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\216.01.mom" />
     <None Include="MarketingCloudSDK.bundle\SFMCModel.momd\214.00.mom" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="MarketingCloudSDK.xcframework\ios-arm64\MarketingCloudSDK.framework\Info.plist">
+      <Link>Resources\Info.plist</Link>
+    </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>
